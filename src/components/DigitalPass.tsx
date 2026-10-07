@@ -5,6 +5,7 @@ export interface DigitalPassProps {
   rollNumber: string;
   program: string;
   batch: string;
+  photoUrl?: string;
   id?: string;
 }
 
@@ -13,6 +14,7 @@ export const DigitalPass: React.FC<DigitalPassProps> = ({
   rollNumber,
   program,
   batch,
+  photoUrl,
   id = 'digital-pass-card',
 }) => {
   return (
@@ -27,7 +29,26 @@ export const DigitalPass: React.FC<DigitalPassProps> = ({
         className="w-full h-full object-cover block pointer-events-none"
       />
 
-      {/* Dynamic Overlays Positioned Exactly Inside The Template Pill Boxes */}
+      {/* DYNAMIC USER PHOTO OVERLAY INSIDE THE CIRCULAR GOLD RING */}
+      {photoUrl && (
+        <div
+          style={{
+            top: '36.1%',
+            left: '40.25%',
+            width: '19.5%',
+            height: '13.0%',
+          }}
+          className="absolute rounded-full overflow-hidden flex items-center justify-center bg-[#FAF8F4] z-10 shadow-inner"
+        >
+          <img
+            src={photoUrl}
+            alt={`${name}'s Pass Profile Photo`}
+            className="w-full h-full object-cover rounded-full"
+          />
+        </div>
+      )}
+
+      {/* Dynamic Text Overlays Positioned Exactly Inside The Template Pill Boxes */}
 
       {/* 1. NAME FIELD */}
       <div
@@ -37,7 +58,7 @@ export const DigitalPass: React.FC<DigitalPassProps> = ({
           width: '45.5%',
           height: '2.86%',
         }}
-        className="absolute flex items-center justify-start text-[#3A1F45] font-serif font-bold text-[clamp(11px,2.7vw,16px)] leading-none px-2 tracking-wide overflow-hidden"
+        className="absolute z-10 flex items-center justify-start text-[#3A1F45] font-serif font-bold text-[clamp(11px,2.7vw,16px)] leading-none px-2 tracking-wide overflow-hidden"
       >
         <span className="truncate w-full text-left">{name}</span>
       </div>
@@ -50,7 +71,7 @@ export const DigitalPass: React.FC<DigitalPassProps> = ({
           width: '45.5%',
           height: '2.80%',
         }}
-        className="absolute flex items-center justify-start text-[#3A1F45] font-serif font-bold text-[clamp(11px,2.7vw,16px)] leading-none px-2 tracking-wider overflow-hidden"
+        className="absolute z-10 flex items-center justify-start text-[#3A1F45] font-serif font-bold text-[clamp(11px,2.7vw,16px)] leading-none px-2 tracking-wider overflow-hidden"
       >
         <span className="truncate w-full text-left">{rollNumber}</span>
       </div>
@@ -63,7 +84,7 @@ export const DigitalPass: React.FC<DigitalPassProps> = ({
           width: '45.5%',
           height: '2.86%',
         }}
-        className="absolute flex items-center justify-start text-[#3A1F45] font-serif font-bold text-[clamp(10px,2.4vw,15px)] leading-none px-2 tracking-wide overflow-hidden"
+        className="absolute z-10 flex items-center justify-start text-[#3A1F45] font-serif font-bold text-[clamp(10px,2.4vw,15px)] leading-none px-2 tracking-wide overflow-hidden"
       >
         <span className="truncate w-full text-left">{program}</span>
       </div>
@@ -76,7 +97,7 @@ export const DigitalPass: React.FC<DigitalPassProps> = ({
           width: '45.5%',
           height: '2.80%',
         }}
-        className="absolute flex items-center justify-start text-[#3A1F45] font-serif font-bold text-[clamp(11px,2.7vw,16px)] leading-none px-2 tracking-wide overflow-hidden"
+        className="absolute z-10 flex items-center justify-start text-[#3A1F45] font-serif font-bold text-[clamp(11px,2.7vw,16px)] leading-none px-2 tracking-wide overflow-hidden"
       >
         <span className="truncate w-full text-left">{batch}</span>
       </div>

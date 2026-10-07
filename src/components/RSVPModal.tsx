@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Sparkles, Download, Ticket, RotateCcw, AlertCircle } from 'lucide-react';
+import { X, Sparkles, Download, Ticket, RotateCcw, AlertCircle, Upload, Camera } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { DigitalPass } from './DigitalPass';
 import { generatePassPdf } from '../utils/generatePassPdf';
@@ -15,10 +15,28 @@ export const RSVPModal: React.FC<RSVPModalProps> = ({ isOpen, onClose }) => {
   const [rollNo, setRollNo] = useState('');
   const [program, setProgram] = useState('M.Sc. Mathematics');
   const [batch, setBatch] = useState('2026-2028');
+  const [photoUrl, setPhotoUrl] = useState<string>('');
   const [validationError, setValidationError] = useState('');
   const [isDownloading, setIsDownloading] = useState(false);
 
   if (!isOpen) return null;
+
+  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        setValidationError('Photo size should be less than 5MB.');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        if (event.target?.result) {
+          setPhotoUrl(event.target.result as string);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleGeneratePass = (e: React.FormEvent) => {
     e.preventDefault();
@@ -91,7 +109,7 @@ export const RSVPModal: React.FC<RSVPModalProps> = ({ isOpen, onClose }) => {
 
         {/* STEP 1: FORM INPUT */}
         {step === 'form' && (
-          <form onSubmit={handleGeneratePass} className="space-y-4 pt-1 overflow-y-auto">
+          <form onSubmit={handleGeneratePass} className="space-y-4 pt-1 overflow-y-auto pr-1">
             <div className="flex items-center gap-2 text-[#C9A96E] font-semibold text-xs uppercase tracking-widest">
               <Sparkles className="w-4 h-4" /> Fresher Pass Registration
             </div>
@@ -102,7 +120,7 @@ export const RSVPModal: React.FC<RSVPModalProps> = ({ isOpen, onClose }) => {
                 <span className="font-script text-3xl sm:text-4xl text-[#6F557D]">Fresher Pass</span>
               </h3>
               <p className="text-xs text-[#35283A]/75 mt-1 font-light">
-                Enter your details to generate your official Integral Festa 2026 entry pass card.
+                Enter your details & upload your photo to generate your personalized entry pass.
               </p>
             </div>
 
@@ -113,6 +131,44 @@ export const RSVPModal: React.FC<RSVPModalProps> = ({ isOpen, onClose }) => {
                 <span>{validationError}</span>
               </div>
             )}
+
+            {/* PHOTO UPLOAD FIELD */}
+            <div className="flex items-center gap-4 p-3 rounded-2xl bg-[#EEE8F1]/50 border border-[#DCD2E3]">
+              <div className="relative w-16 h-16 rounded-full overflow-hidden bg-[#FAF8F4] border-2 border-[#C9A96E] flex items-center justify-center shrink-0 shadow-sm">
+                {photoUrl ? (
+                  <img src={photoUrl} alt="Uploaded Avatar Preview" className="w-full h-full object-cover" />
+                ) : (
+                  <Camera className="w-6 h-6 text-[#6F557D]/60" />
+                )}
+              </div>
+
+              <div className="flex-1 space-y-1">
+                <label className="text-xs font-semibold text-[#432C4D] block">
+                  Student Photo <span className="text-xs font-normal text-[#71806B]">(Recommended)</span>
+                </label>
+                <div className="flex gap-2">
+                  <label className="py-1.5 px-3 rounded-xl bg-[#432C4D] hover:bg-[#6F557D] text-[#FAF8F4] text-xs font-medium cursor-pointer transition-colors flex items-center gap-1.5 shadow-sm">
+                    <Upload className="w-3.5 h-3.5 text-[#C9A96E]" />
+                    <span>{photoUrl ? 'Change Photo' : 'Upload Photo'}</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handlePhotoUpload}
+                      className="hidden"
+                    />
+                  </label>
+                  {photoUrl && (
+                    <button
+                      type="button"
+                      onClick={() => setPhotoUrl('')}
+                      className="py-1.5 px-2.5 rounded-xl bg-[#FAF8F4] text-[#432C4D] text-xs border border-[#DCD2E3] hover:bg-red-50 hover:text-red-600 transition-colors"
+                    >
+                      Remove
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
 
             <div className="space-y-3 pt-1">
               <div>
@@ -204,6 +260,7 @@ export const RSVPModal: React.FC<RSVPModalProps> = ({ isOpen, onClose }) => {
                 rollNumber={rollNo}
                 program={program}
                 batch={batch}
+                photoUrl={photoUrl}
               />
             </div>
 

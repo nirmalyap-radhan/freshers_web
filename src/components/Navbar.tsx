@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
 import type { PageId } from '../types';
-import { Menu, X, Sparkles, Calendar, Compass, Image, Users, Mail, Home, Ticket } from 'lucide-react';
+import { Menu, X, Sparkles, Calendar, Compass, Image, Users, Mail, Home, Ticket, FileText } from 'lucide-react';
 
 interface NavbarProps {
   currentPage: PageId;
   onNavigate: (page: PageId) => void;
   onOpenRSVP?: () => void;
+  onOpenPoster?: () => void;
   isInsidePhone?: boolean;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenRSVP, isInsidePhone = false }) => {
+export const Navbar: React.FC<NavbarProps> = ({
+  currentPage,
+  onNavigate,
+  onOpenRSVP,
+  onOpenPoster,
+  isInsidePhone = false,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems: { id: PageId; label: string; sub: string; icon: React.ReactNode }[] = [
@@ -27,9 +34,11 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenR
   };
 
   return (
-    <header className={`sticky top-0 z-40 backdrop-blur-md bg-[#FAF8F4]/85 border-b border-[#DCD2E3]/50 transition-all duration-300 ${
-      isInsidePhone ? 'py-2 px-3' : 'py-3 px-4 sm:px-6 lg:px-8'
-    }`}>
+    <header
+      className={`sticky top-0 z-40 backdrop-blur-md bg-[#FAF8F4]/85 border-b border-[#DCD2E3]/50 transition-all duration-300 ${
+        isInsidePhone ? 'py-2 px-3' : 'py-3 px-4 sm:px-6 lg:px-8'
+      }`}
+    >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Brand Logo & Department */}
         <button
@@ -74,8 +83,19 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenR
           </nav>
         )}
 
-        {/* Right CTA Button & Mobile Menu Toggle */}
+        {/* Right Action Buttons */}
         <div className="flex items-center gap-2">
+          {onOpenPoster && (
+            <button
+              onClick={onOpenPoster}
+              className="hidden sm:flex py-2 px-3 rounded-2xl bg-[#EEE8F1] hover:bg-[#DCD2E3] text-[#432C4D] text-xs font-semibold border border-[#DCD2E3] transition-colors items-center gap-1.5"
+              title="View Official Invitation Poster"
+            >
+              <FileText className="w-3.5 h-3.5 text-[#6F557D]" />
+              <span>Poster</span>
+            </button>
+          )}
+
           {onOpenRSVP && (
             <button
               onClick={onOpenRSVP}
@@ -134,7 +154,11 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenR
                   }`}
                 >
                   <div className="flex items-center gap-4">
-                    <div className={`p-2.5 rounded-xl ${isActive ? 'bg-[#C9A96E] text-[#432C4D]' : 'bg-[#6F557D]/40 text-[#C9A96E]'}`}>
+                    <div
+                      className={`p-2.5 rounded-xl ${
+                        isActive ? 'bg-[#C9A96E] text-[#432C4D]' : 'bg-[#6F557D]/40 text-[#C9A96E]'
+                      }`}
+                    >
                       {item.icon}
                     </div>
                     <div>
@@ -142,9 +166,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenR
                         {item.label}
                         {isActive && <Sparkles className="w-4 h-4 text-[#C9A96E] inline" />}
                       </div>
-                      <div className="text-xs text-[#FAF8F4]/60 font-light">
-                        {item.sub}
-                      </div>
+                      <div className="text-xs text-[#FAF8F4]/60 font-light">{item.sub}</div>
                     </div>
                   </div>
                   <div className="text-xs font-serif text-[#C9A96E] opacity-50 group-hover:opacity-100 transition-opacity">
@@ -154,8 +176,20 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenR
               );
             })}
 
-            {onOpenRSVP && (
-              <div className="pt-4">
+            <div className="pt-4 space-y-2">
+              {onOpenPoster && (
+                <button
+                  onClick={() => {
+                    setIsOpen(false);
+                    onOpenPoster();
+                  }}
+                  className="w-full py-3 rounded-2xl bg-[#6F557D]/60 text-[#FAF8F4] font-medium text-xs border border-[#C9A96E]/30 flex items-center justify-center gap-2"
+                >
+                  <FileText className="w-4 h-4 text-[#C9A96E]" /> View Invitation Poster
+                </button>
+              )}
+
+              {onOpenRSVP && (
                 <button
                   onClick={() => {
                     setIsOpen(false);
@@ -165,8 +199,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenR
                 >
                   <Ticket className="w-4 h-4" /> Get Fresher Pass
                 </button>
-              </div>
-            )}
+              )}
+            </div>
           </div>
 
           {/* Footer Info inside Overlay */}

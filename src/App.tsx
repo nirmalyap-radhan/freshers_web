@@ -10,12 +10,14 @@ import { GallerySection } from './pages/GallerySection';
 import { TeamSection } from './pages/TeamSection';
 import { ContactSection } from './pages/ContactSection';
 import { RSVPModal } from './components/RSVPModal';
+import { InvitationPosterModal } from './components/InvitationPosterModal';
 import { EVENT_DETAILS } from './data/mockData';
 import { Sparkles, Heart } from 'lucide-react';
 
 export function App() {
   const [currentPage, setCurrentPage] = useState<PageId>('home');
   const [isRSVPModalOpen, setIsRSVPModalOpen] = useState<boolean>(false);
+  const [isPosterOpen, setIsPosterOpen] = useState<boolean>(true); // Opens by default on page load!
   const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
   const [displayedPage, setDisplayedPage] = useState<PageId>('home');
 
@@ -75,6 +77,7 @@ export function App() {
         currentPage={currentPage}
         onNavigate={handleNavigate}
         onOpenRSVP={() => setIsRSVPModalOpen(true)}
+        onOpenPoster={() => setIsPosterOpen(true)}
       />
 
       {/* Main Full Viewport Website Content Container */}
@@ -126,6 +129,12 @@ export function App() {
           </div>
         </div>
       </footer>
+
+      {/* Starting Invitation Poster Modal (With X Cross Button) */}
+      <InvitationPosterModal
+        isOpen={isPosterOpen}
+        onClose={() => setIsPosterOpen(false)}
+      />
 
       {/* Interactive Badge Pass Modal */}
       <RSVPModal

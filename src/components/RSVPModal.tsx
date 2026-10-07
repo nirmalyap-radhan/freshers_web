@@ -75,7 +75,14 @@ export const RSVPModal: React.FC<RSVPModalProps> = ({ isOpen, onClose }) => {
   const handleDownloadPdf = async () => {
     try {
       setIsDownloading(true);
-      await generatePassPdf('digital-pass-card', name);
+      // Pass student pass data to direct 2D Canvas PDF generator for 100% pixel-perfect text placement!
+      await generatePassPdf('digital-pass-card', name, {
+        name,
+        rollNumber: rollNo,
+        program,
+        batch,
+        photoUrl,
+      });
     } catch (err) {
       console.error('Failed to generate PDF:', err);
       alert('Could not download PDF. Please try again.');

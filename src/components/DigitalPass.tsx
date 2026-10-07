@@ -18,7 +18,7 @@ export const DigitalPass: React.FC<DigitalPassProps> = ({
   return (
     <div
       id={id}
-      className="relative w-full max-w-sm sm:max-w-md mx-auto aspect-[1136/1600] rounded-3xl overflow-hidden shadow-2xl select-none bg-[#FAF8F4]"
+      className="relative w-full max-w-sm sm:max-w-md mx-auto aspect-[1024/1536] rounded-3xl overflow-hidden shadow-2xl select-none bg-[#FAF8F4]"
     >
       {/* Official Template Image Background */}
       <img
@@ -27,58 +27,58 @@ export const DigitalPass: React.FC<DigitalPassProps> = ({
         className="w-full h-full object-cover block pointer-events-none"
       />
 
-      {/* Dynamic Overlays Positioned Precisely on Template Fields */}
+      {/* Dynamic Overlays Positioned Exactly Inside The Template Pill Boxes */}
 
-      {/* NAME FIELD */}
+      {/* 1. NAME FIELD */}
       <div
         style={{
-          top: '50.75%',
-          left: '39.6%',
-          width: '44.5%',
-          height: '4.2%',
+          top: '49.28%',
+          left: '40.5%',
+          width: '45.5%',
+          height: '2.86%',
         }}
-        className="absolute flex items-center justify-start text-[#35203F] font-serif font-bold text-[clamp(11px,2.8vw,16px)] leading-none px-2 tracking-wide overflow-hidden"
+        className="absolute flex items-center justify-start text-[#3A1F45] font-serif font-bold text-[clamp(11px,2.7vw,16px)] leading-none px-2 tracking-wide overflow-hidden"
       >
-        <span className="truncate w-full">{name}</span>
+        <span className="truncate w-full text-left">{name}</span>
       </div>
 
-      {/* ROLL NO FIELD */}
+      {/* 2. ROLL NO FIELD */}
       <div
         style={{
-          top: '56.0%',
-          left: '39.6%',
-          width: '44.5%',
-          height: '4.2%',
+          top: '53.91%',
+          left: '40.5%',
+          width: '45.5%',
+          height: '2.80%',
         }}
-        className="absolute flex items-center justify-start text-[#35203F] font-serif font-bold text-[clamp(11px,2.8vw,16px)] leading-none px-2 tracking-wider overflow-hidden"
+        className="absolute flex items-center justify-start text-[#3A1F45] font-serif font-bold text-[clamp(11px,2.7vw,16px)] leading-none px-2 tracking-wider overflow-hidden"
       >
-        <span className="truncate w-full">{rollNumber}</span>
+        <span className="truncate w-full text-left">{rollNumber}</span>
       </div>
 
-      {/* PROGRAM FIELD */}
+      {/* 3. PROGRAM FIELD */}
       <div
         style={{
-          top: '61.25%',
-          left: '39.6%',
-          width: '44.5%',
-          height: '4.2%',
+          top: '58.33%',
+          left: '40.5%',
+          width: '45.5%',
+          height: '2.86%',
         }}
-        className="absolute flex items-center justify-start text-[#35203F] font-serif font-bold text-[clamp(10px,2.5vw,15px)] leading-none px-2 tracking-wide overflow-hidden"
+        className="absolute flex items-center justify-start text-[#3A1F45] font-serif font-bold text-[clamp(10px,2.4vw,15px)] leading-none px-2 tracking-wide overflow-hidden"
       >
-        <span className="truncate w-full">{program}</span>
+        <span className="truncate w-full text-left">{program}</span>
       </div>
 
-      {/* BATCH FIELD */}
+      {/* 4. BATCH FIELD */}
       <div
         style={{
-          top: '66.5%',
-          left: '39.6%',
-          width: '44.5%',
-          height: '4.2%',
+          top: '63.02%',
+          left: '40.5%',
+          width: '45.5%',
+          height: '2.80%',
         }}
-        className="absolute flex items-center justify-start text-[#35203F] font-serif font-bold text-[clamp(11px,2.8vw,16px)] leading-none px-2 tracking-wide overflow-hidden"
+        className="absolute flex items-center justify-start text-[#3A1F45] font-serif font-bold text-[clamp(11px,2.7vw,16px)] leading-none px-2 tracking-wide overflow-hidden"
       >
-        <span className="truncate w-full">{batch}</span>
+        <span className="truncate w-full text-left">{batch}</span>
       </div>
     </div>
   );

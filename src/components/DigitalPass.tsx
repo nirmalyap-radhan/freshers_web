@@ -33,12 +33,11 @@ export const DigitalPass: React.FC<DigitalPassProps> = ({
       {photoUrl && (
         <div
           style={{
-            top: '36.1%',
-            left: '40.25%',
-            width: '19.5%',
-            height: '13.0%',
+            top: '33.8%',
+            left: '36.2%',
+            width: '27.6%',
           }}
-          className="absolute rounded-full overflow-hidden flex items-center justify-center bg-[#FAF8F4] z-10 shadow-inner"
+          className="absolute aspect-square rounded-full overflow-hidden flex items-center justify-center bg-[#FAF8F4] z-10 shadow-md border-2 border-[#C9A96E]/40"
         >
           <img
             src={photoUrl}

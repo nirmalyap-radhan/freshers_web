@@ -57,9 +57,9 @@ export const DigitalPass: React.FC<DigitalPassProps> = ({
           width: '45.5%',
           height: '2.86%',
         }}
-        className="absolute z-10 flex items-center justify-start text-[#3A1F45] font-serif font-bold text-[clamp(11px,2.7vw,16px)] leading-none px-2 tracking-wide overflow-hidden"
+        className="absolute z-10 flex flex-col justify-center text-[#3A1F45] font-serif font-bold text-[clamp(11px,2.7vw,16px)] leading-tight px-2 tracking-wide overflow-hidden"
       >
-        <span className="truncate w-full text-left">{name}</span>
+        <span className="truncate w-full text-left leading-none">{name}</span>
       </div>
 
       {/* 2. ROLL NO FIELD */}
@@ -70,9 +70,9 @@ export const DigitalPass: React.FC<DigitalPassProps> = ({
           width: '45.5%',
           height: '2.80%',
         }}
-        className="absolute z-10 flex items-center justify-start text-[#3A1F45] font-serif font-bold text-[clamp(11px,2.7vw,16px)] leading-none px-2 tracking-wider overflow-hidden"
+        className="absolute z-10 flex flex-col justify-center text-[#3A1F45] font-serif font-bold text-[clamp(11px,2.7vw,16px)] leading-tight px-2 tracking-wider overflow-hidden"
       >
-        <span className="truncate w-full text-left">{rollNumber}</span>
+        <span className="truncate w-full text-left leading-none">{rollNumber}</span>
       </div>
 
       {/* 3. PROGRAM FIELD */}
@@ -83,9 +83,9 @@ export const DigitalPass: React.FC<DigitalPassProps> = ({
           width: '45.5%',
           height: '2.86%',
         }}
-        className="absolute z-10 flex items-center justify-start text-[#3A1F45] font-serif font-bold text-[clamp(10px,2.4vw,15px)] leading-none px-2 tracking-wide overflow-hidden"
+        className="absolute z-10 flex flex-col justify-center text-[#3A1F45] font-serif font-bold text-[clamp(10px,2.4vw,15px)] leading-tight px-2 tracking-wide overflow-hidden"
       >
-        <span className="truncate w-full text-left">{program}</span>
+        <span className="truncate w-full text-left leading-none">{program}</span>
       </div>
 
       {/* 4. BATCH FIELD */}
@@ -96,9 +96,9 @@ export const DigitalPass: React.FC<DigitalPassProps> = ({
           width: '45.5%',
           height: '2.80%',
         }}
-        className="absolute z-10 flex items-center justify-start text-[#3A1F45] font-serif font-bold text-[clamp(11px,2.7vw,16px)] leading-none px-2 tracking-wide overflow-hidden"
+        className="absolute z-10 flex flex-col justify-center text-[#3A1F45] font-serif font-bold text-[clamp(11px,2.7vw,16px)] leading-tight px-2 tracking-wide overflow-hidden"
       >
-        <span className="truncate w-full text-left">{batch}</span>
+        <span className="truncate w-full text-left leading-none">{batch}</span>
       </div>
     </div>
   );

@@ -18,6 +18,7 @@ export const InvitationPosterModal: React.FC<InvitationPosterModalProps> = ({
   useEffect(() => {
     if (isOpen) {
       setIsVisible(true);
+      setImgError(false); // Reset error state on open
     } else {
       const timer = setTimeout(() => setIsVisible(false), 300);
       return () => clearTimeout(timer);
@@ -37,32 +38,35 @@ export const InvitationPosterModal: React.FC<InvitationPosterModalProps> = ({
 
       {/* Main Poster Container Card */}
       <div
-        className={`relative z-10 w-full max-w-md sm:max-w-lg bg-[#FAF8F4] border-2 border-[#C9A96E]/50 rounded-[32px] overflow-hidden shadow-2xl transition-all duration-500 ease-out transform ${
+        className={`relative z-10 w-full max-w-sm sm:max-w-md md:max-w-lg bg-[#FAF8F4] border-2 border-[#C9A96E]/50 rounded-[32px] overflow-hidden shadow-2xl transition-all duration-500 ease-out transform ${
           isOpen ? 'scale-100 translate-y-0' : 'scale-95 translate-y-4'
         }`}
       >
-        {/* Prominent Top-Right Cross Button (X) */}
+        {/* Prominent Floating Top-Right Cross Button (X) */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-30 p-3 rounded-full bg-[#432C4D] text-[#FAF8F4] hover:bg-[#6F557D] active:scale-90 transition-all shadow-2xl border-2 border-[#C9A96E] flex items-center justify-center group"
-          aria-label="Close invitation poster and enter website"
+          className="absolute top-4 right-4 z-30 p-3 rounded-full bg-[#432C4D]/90 hover:bg-[#6F557D] text-[#FAF8F4] active:scale-90 transition-all shadow-2xl border-2 border-[#C9A96E] flex items-center justify-center group"
+          aria-label="Close invitation poster"
           title="Close Invitation (X)"
         >
           <X className="w-6 h-6 text-[#C9A96E] group-hover:rotate-90 transition-transform duration-300" />
         </button>
 
-        {/* Poster Image or Rendered Fallback */}
+        {/* Poster Content Area */}
         <div className="relative w-full overflow-hidden bg-[#FAF8F4] flex flex-col items-center justify-center">
           {!imgError ? (
-            <div className="relative w-full">
-              <img
-                src={posterImagePath}
-                alt="Integral Festa 2026 Invitation Poster"
-                onError={() => setImgError(true)}
-                className="w-full h-auto max-h-[75vh] object-contain block mx-auto rounded-t-[30px]"
-              />
-              {/* Bottom CTA Button below Image */}
-              <div className="p-4 bg-[#FAF8F4] border-t border-[#DCD2E3]/60 w-full">
+            <div className="relative w-full flex flex-col items-center">
+              <div className="max-h-[72vh] sm:max-h-[78vh] overflow-y-auto w-full flex justify-center bg-[#FAF8F4] scrollbar-thin">
+                <img
+                  src={posterImagePath}
+                  alt="Integral Festa 2026 Official Invitation Poster"
+                  onError={() => setImgError(true)}
+                  className="w-full h-auto object-contain block rounded-t-[30px]"
+                />
+              </div>
+
+              {/* Bottom CTA Button */}
+              <div className="p-3.5 sm:p-4 bg-[#FAF8F4] border-t border-[#DCD2E3]/60 w-full">
                 <button
                   onClick={onClose}
                   className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-[#432C4D] to-[#6F557D] text-[#FAF8F4] font-medium text-sm transition-all duration-300 shadow-xl hover:shadow-2xl flex items-center justify-center gap-2.5 shimmer-btn group"
@@ -74,8 +78,8 @@ export const InvitationPosterModal: React.FC<InvitationPosterModalProps> = ({
               </div>
             </div>
           ) : (
-            // Code Component Fallback if image file is not found
-            <div className="p-6 sm:p-10 text-center space-y-6 min-h-[520px] flex flex-col justify-between w-full">
+            // Styled Fallback Poster Card if image URL fails
+            <div className="p-6 sm:p-10 text-center space-y-6 min-h-[480px] flex flex-col justify-between w-full">
               <div className="pt-2">
                 <div className="inline-block text-[11px] sm:text-xs font-semibold tracking-[0.25em] text-[#432C4D] uppercase border-b border-[#C9A96E]/40 pb-1">
                   . DEPT. OF MATHEMATICS .

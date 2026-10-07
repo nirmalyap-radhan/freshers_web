@@ -102,15 +102,15 @@ export const GALLERY_DATA: GalleryItem[] = [
     id: "g1",
     title: "Elegance in Numbers",
     category: "highlights",
-    imageUrl: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=800&q=80",
-    caption: "Students celebrating together at the previous inaugural gala in IQAC Hall.",
-    date: "Integral Festa 2025"
+    imageUrl: "/gallery/photo1.jpg",
+    caption: "Students celebrating together at the inaugural gala in IQAC Hall.",
+    date: "Integral Festa 2026"
   },
   {
     id: "g2",
     title: "Botanical Ambience",
     category: "highlights",
-    imageUrl: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/gallery/photo2.jpg",
     caption: "Floral decorations framing the entrance of Science PG Block.",
     date: "Decorations Preview"
   },
@@ -118,7 +118,7 @@ export const GALLERY_DATA: GalleryItem[] = [
     id: "g3",
     title: "Cultural Fusion Stage",
     category: "past",
-    imageUrl: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/gallery/photo3.jpg",
     caption: "Vibrant stage performances by senior mathematics scholars.",
     date: "Fest Memories"
   },
@@ -126,7 +126,7 @@ export const GALLERY_DATA: GalleryItem[] = [
     id: "g4",
     title: "Departmental Campus",
     category: "campus",
-    imageUrl: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/gallery/photo4.jpg",
     caption: "Science PG Block campus surrounded by lush green foliage.",
     date: "Adaspur Campus"
   },
@@ -134,7 +134,7 @@ export const GALLERY_DATA: GalleryItem[] = [
     id: "g5",
     title: "Mathematical Artistry",
     category: "teaser",
-    imageUrl: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/gallery/photo5.jpg",
     caption: "Geometrical aesthetics and infinity design installation.",
     date: "Art Installation"
   },
@@ -142,7 +142,7 @@ export const GALLERY_DATA: GalleryItem[] = [
     id: "g6",
     title: "Joyous Moments & Smiles",
     category: "highlights",
-    imageUrl: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/gallery/photo6.jpg",
     caption: "Freshers and seniors enjoying the interactive icebreaker activities.",
     date: "Fresher Welcome"
   },
@@ -150,7 +150,7 @@ export const GALLERY_DATA: GalleryItem[] = [
     id: "g7",
     title: "Acoustic Sunset Jam",
     category: "past",
-    imageUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/gallery/photo7.jpg",
     caption: "Unplugged musical performances as dusk settled over campus.",
     date: "Musical Session"
   },
@@ -158,7 +158,7 @@ export const GALLERY_DATA: GalleryItem[] = [
     id: "g8",
     title: "Trophy & Recognition",
     category: "highlights",
-    imageUrl: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/gallery/photo8.jpg",
     caption: "Golden trophies and certificates prepared for event winners.",
     date: "Awards 2026"
   }

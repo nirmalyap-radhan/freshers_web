@@ -4,9 +4,21 @@ import type { GalleryItem } from '../types';
 import { LightboxModal } from '../components/LightboxModal';
 import { Image as ImageIcon, Maximize2 } from 'lucide-react';
 
+const FALLBACK_IMAGES: Record<string, string> = {
+  g1: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=800&q=80",
+  g2: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
+  g3: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80",
+  g4: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80",
+  g5: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=800&q=80",
+  g6: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80",
+  g7: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80",
+  g8: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?auto=format&fit=crop&w=800&q=80",
+};
+
 export const GallerySection: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
 
   const categories = [
     { id: 'all', label: 'All Photographs' },
@@ -32,6 +44,13 @@ export const GallerySection: React.FC = () => {
     const currentIndex = filteredItems.findIndex(i => i.id === selectedItem.id);
     const prevIndex = (currentIndex - 1 + filteredItems.length) % filteredItems.length;
     setSelectedItem(filteredItems[prevIndex]);
+  };
+
+  const getImageSrc = (item: GalleryItem) => {
+    if (failedImages[item.id]) {
+      return FALLBACK_IMAGES[item.id] || item.imageUrl;
+    }
+    return item.imageUrl;
   };
 
   return (
@@ -80,9 +99,10 @@ export const GallerySection: React.FC = () => {
             {/* Aspect Ratio Container */}
             <div className="aspect-[4/3] w-full overflow-hidden bg-[#EEE8F1]/50 relative">
               <img
-                src={item.imageUrl}
+                src={getImageSrc(item)}
                 alt={item.title}
                 loading="lazy"
+                onError={() => setFailedImages(prev => ({ ...prev, [item.id]: true }))}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
               />
 
@@ -116,7 +136,7 @@ export const GallerySection: React.FC = () => {
 
       {/* Lightbox Modal */}
       <LightboxModal
-        item={selectedItem}
+        item={selectedItem ? { ...selectedItem, imageUrl: getImageSrc(selectedItem) } : null}
         onClose={() => setSelectedItem(null)}
         onNext={handleNext}
         onPrev={handlePrev}

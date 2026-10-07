@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { X, Sparkles, CheckCircle2, Ticket, Download, ArrowRight } from 'lucide-react';
+import { X, Sparkles, Download, Ticket, RotateCcw, AlertCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { EVENT_DETAILS } from '../data/mockData';
+import { DigitalPass } from './DigitalPass';
+import { generatePassPdf } from '../utils/generatePassPdf';
 
 interface RSVPModalProps {
   isOpen: boolean;
@@ -9,230 +10,226 @@ interface RSVPModalProps {
 }
 
 export const RSVPModal: React.FC<RSVPModalProps> = ({ isOpen, onClose }) => {
-  const [step, setStep] = useState<1 | 2 | 3>(1);
+  const [step, setStep] = useState<'form' | 'pass'>('form');
   const [name, setName] = useState('');
   const [rollNo, setRollNo] = useState('');
-  const [stream, setStream] = useState('M.Sc. Mathematics (Fresher)');
-  const [foodPref, setFoodPref] = useState<'veg' | 'non-veg'>('veg');
-  const [ticketId, setTicketId] = useState('');
+  const [program, setProgram] = useState('M.Sc. Mathematics');
+  const [batch, setBatch] = useState('2026-2028');
+  const [validationError, setValidationError] = useState('');
+  const [isDownloading, setIsDownloading] = useState(false);
 
   if (!isOpen) return null;
 
-  const handleStep1 = (e: React.FormEvent) => {
+  const handleGeneratePass = (e: React.FormEvent) => {
     e.preventDefault();
-    if (name.trim()) setStep(2);
+    setValidationError('');
+
+    // Validation
+    if (!name.trim()) {
+      setValidationError('Please enter your full name.');
+      return;
+    }
+    if (!rollNo.trim()) {
+      setValidationError('Please enter your roll number.');
+      return;
+    }
+    if (!program.trim()) {
+      setValidationError('Please enter your program/course.');
+      return;
+    }
+    if (!batch.trim()) {
+      setValidationError('Please enter your batch.');
+      return;
+    }
+
+    // Switch to Pass Preview step
+    setStep('pass');
+
+    // Trigger celebration confetti
+    confetti({
+      particleCount: 90,
+      spread: 75,
+      origin: { y: 0.6 },
+      colors: ['#6F557D', '#C9A96E', '#EEE8F1', '#432C4D'],
+    });
   };
 
-  const handleStep2 = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (rollNo.trim()) {
-      const generatedId = 'MATH-' + Math.floor(1000 + Math.random() * 9000);
-      setTicketId(generatedId);
-      setStep(3);
-      // Trigger elegant gold/purple confetti
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#6F557D', '#C9A96E', '#EEE8F1', '#432C4D']
-      });
+  const handleDownloadPdf = async () => {
+    try {
+      setIsDownloading(true);
+      await generatePassPdf('digital-pass-card', name);
+    } catch (err) {
+      console.error('Failed to generate PDF:', err);
+      alert('Could not download PDF. Please try again.');
+    } finally {
+      setIsDownloading(false);
     }
   };
 
   const resetModal = () => {
-    setStep(1);
-    setName('');
-    setRollNo('');
+    setStep('form');
+    setValidationError('');
     onClose();
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#35283A]/70 backdrop-blur-md animate-fadeIn">
-      <div className="relative w-full max-w-md bg-[#FAF8F4] border border-[#C9A96E]/40 rounded-3xl p-6 shadow-2xl overflow-hidden">
-        {/* Decorative Gold Corner Accent */}
-        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#C9A96E]/20 to-transparent rounded-bl-full pointer-events-none" />
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#2B2332]/85 backdrop-blur-md animate-fadeIn transition-opacity duration-300">
+      {/* Click Backdrop to close */}
+      <div className="absolute inset-0" onClick={resetModal} />
 
-        {/* Close Button */}
+      {/* Main Container */}
+      <div className="relative z-10 w-full max-w-md sm:max-w-lg bg-[#FAF8F4] border-2 border-[#C9A96E]/50 rounded-[32px] p-5 sm:p-7 shadow-2xl overflow-hidden max-h-[92vh] flex flex-col justify-between">
+        
+        {/* Close Cross Button */}
         <button
           onClick={resetModal}
-          className="absolute top-4 right-4 p-2 rounded-full bg-[#EEE8F1] text-[#432C4D] hover:bg-[#DCD2E3] transition-colors"
+          className="absolute top-4 right-4 z-30 p-2.5 rounded-full bg-[#EEE8F1] text-[#432C4D] hover:bg-[#DCD2E3] active:scale-95 transition-all shadow-sm border border-[#DCD2E3]"
+          aria-label="Close modal"
         >
           <X className="w-5 h-5" />
         </button>
 
-        {/* STEP 1: Name Input */}
-        {step === 1 && (
-          <form onSubmit={handleStep1} className="space-y-5 pt-2">
-            <div className="flex items-center gap-2 text-[#C9A96E] font-medium text-xs uppercase tracking-widest">
-              <Sparkles className="w-4 h-4" /> Question 01 of 02
+        {/* STEP 1: FORM INPUT */}
+        {step === 'form' && (
+          <form onSubmit={handleGeneratePass} className="space-y-4 pt-1 overflow-y-auto">
+            <div className="flex items-center gap-2 text-[#C9A96E] font-semibold text-xs uppercase tracking-widest">
+              <Sparkles className="w-4 h-4" /> Fresher Pass Registration
             </div>
 
-            <h3 className="font-serif text-2xl md:text-3xl text-[#432C4D] font-bold leading-tight">
-              First things first... <br />
-              <span className="font-script text-3xl text-[#6F557D]">What should we call you?</span>
-            </h3>
-
-            <p className="text-xs text-[#35283A]/70">
-              Enter your full name as you would like it printed on your official Integral Festa fresher pass.
-            </p>
-
-            <div className="space-y-2">
-              <label className="text-xs font-semibold text-[#432C4D] block">Your Name</label>
-              <input
-                type="text"
-                required
-                placeholder="e.g. Priyadarshini Sahoo"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-3 rounded-2xl bg-[#EEE8F1]/60 border border-[#DCD2E3] text-[#432C4D] placeholder-[#6F557D]/50 focus:outline-none focus:border-[#6F557D] focus:ring-2 focus:ring-[#6F557D]/20 transition-all font-medium text-sm"
-              />
+            <div>
+              <h3 className="font-serif text-2xl sm:text-3xl text-[#432C4D] font-bold leading-tight">
+                Generate Your Official <br />
+                <span className="font-script text-3xl sm:text-4xl text-[#6F557D]">Fresher Pass</span>
+              </h3>
+              <p className="text-xs text-[#35283A]/75 mt-1 font-light">
+                Enter your details to generate your official Integral Festa 2026 entry pass card.
+              </p>
             </div>
 
-            <button
-              type="submit"
-              disabled={!name.trim()}
-              className="w-full py-3.5 px-6 rounded-2xl bg-[#432C4D] hover:bg-[#6F557D] disabled:opacity-50 text-[#FAF8F4] font-medium text-sm transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shimmer-btn"
-            >
-              That's Me <ArrowRight className="w-4 h-4" />
-            </button>
-          </form>
-        )}
+            {/* Validation Error Banner */}
+            {validationError && (
+              <div className="p-3 rounded-2xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0 text-red-500" />
+                <span>{validationError}</span>
+              </div>
+            )}
 
-        {/* STEP 2: Roll Number / ID */}
-        {step === 2 && (
-          <form onSubmit={handleStep2} className="space-y-5 pt-2">
-            <div className="flex items-center gap-2 text-[#C9A96E] font-medium text-xs uppercase tracking-widest">
-              <Sparkles className="w-4 h-4" /> Question 02 of 02
-            </div>
-
-            <h3 className="font-serif text-2xl text-[#432C4D] font-bold leading-tight">
-              Awesome, {name.split(' ')[0]}! <br />
-              <span className="font-script text-3xl text-[#6F557D]">Okay, YOUR ID / Roll No?</span>
-            </h3>
-
-            <div className="space-y-4">
+            <div className="space-y-3 pt-1">
               <div>
-                <label className="text-xs font-semibold text-[#432C4D] block mb-1">Roll Number / Student ID</label>
+                <label className="text-xs font-semibold text-[#432C4D] block mb-1">
+                  Full Name <span className="text-red-500">*</span>
+                </label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. 26MATH042"
-                  value={rollNo}
-                  onChange={(e) => setRollNo(e.target.value)}
-                  className="w-full px-4 py-3 rounded-2xl bg-[#EEE8F1]/60 border border-[#DCD2E3] text-[#432C4D] placeholder-[#6F557D]/50 focus:outline-none focus:border-[#6F557D] transition-all font-medium text-sm"
+                  placeholder="e.g. Nirmalya Pradhan"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-2xl bg-[#EEE8F1]/60 border border-[#DCD2E3] text-[#432C4D] placeholder-[#6F557D]/50 focus:outline-none focus:border-[#6F557D] focus:ring-2 focus:ring-[#6F557D]/20 transition-all font-medium text-sm"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-[#432C4D] block mb-1">Batch / Program</label>
-                <select
-                  value={stream}
-                  onChange={(e) => setStream(e.target.value)}
-                  className="w-full px-4 py-3 rounded-2xl bg-[#EEE8F1]/60 border border-[#DCD2E3] text-[#432C4D] focus:outline-none focus:border-[#6F557D] transition-all text-sm font-medium"
-                >
-                  <option value="M.Sc. Mathematics (Fresher 1st Yr)">M.Sc. Mathematics (Fresher 1st Yr)</option>
-                  <option value="M.Sc. Mathematics (Senior 2nd Yr)">M.Sc. Mathematics (Senior 2nd Yr)</option>
-                  <option value="B.Sc. Mathematics Scholar">B.Sc. Mathematics Scholar</option>
-                  <option value="Faculty / Invited Guest">Faculty / Invited Guest</option>
-                </select>
+                <label className="text-xs font-semibold text-[#432C4D] block mb-1">
+                  Roll Number <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. 234567890"
+                  value={rollNo}
+                  onChange={(e) => setRollNo(e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-2xl bg-[#EEE8F1]/60 border border-[#DCD2E3] text-[#432C4D] placeholder-[#6F557D]/50 focus:outline-none focus:border-[#6F557D] transition-all font-medium text-sm"
+                />
               </div>
 
-              <div>
-                <label className="text-xs font-semibold text-[#432C4D] block mb-1">Lunch Preference</label>
-                <div className="flex gap-3">
-                  {(['veg', 'non-veg'] as const).map((pref) => (
-                    <button
-                      key={pref}
-                      type="button"
-                      onClick={() => setFoodPref(pref)}
-                      className={`flex-1 py-2 rounded-xl text-xs font-semibold capitalize border transition-all ${
-                        foodPref === pref
-                          ? 'bg-[#6F557D] text-[#FAF8F4] border-[#6F557D]'
-                          : 'bg-[#EEE8F1]/40 text-[#432C4D] border-[#DCD2E3]'
-                      }`}
-                    >
-                      {pref === 'veg' ? '🥗 Vegetarian' : '🍗 Non-Vegetarian'}
-                    </button>
-                  ))}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="text-xs font-semibold text-[#432C4D] block mb-1">
+                    Program / Course <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. M.Sc. Mathematics"
+                    value={program}
+                    onChange={(e) => setProgram(e.target.value)}
+                    className="w-full px-4 py-2.5 rounded-2xl bg-[#EEE8F1]/60 border border-[#DCD2E3] text-[#432C4D] placeholder-[#6F557D]/50 focus:outline-none focus:border-[#6F557D] transition-all font-medium text-sm"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-xs font-semibold text-[#432C4D] block mb-1">
+                    Batch <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. 2026-2028"
+                    value={batch}
+                    onChange={(e) => setBatch(e.target.value)}
+                    className="w-full px-4 py-2.5 rounded-2xl bg-[#EEE8F1]/60 border border-[#DCD2E3] text-[#432C4D] placeholder-[#6F557D]/50 focus:outline-none focus:border-[#6F557D] transition-all font-medium text-sm"
+                  />
                 </div>
               </div>
             </div>
 
-            <button
-              type="submit"
-              disabled={!rollNo.trim()}
-              className="w-full py-3.5 px-6 rounded-2xl bg-[#432C4D] hover:bg-[#6F557D] text-[#FAF8F4] font-medium text-sm transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shimmer-btn"
-            >
-              Generate My Entry Pass <Ticket className="w-4 h-4" />
-            </button>
+            <div className="pt-2">
+              <button
+                type="submit"
+                className="w-full py-3.5 px-6 rounded-2xl bg-[#432C4D] hover:bg-[#6F557D] text-[#FAF8F4] font-medium text-sm transition-all duration-300 flex items-center justify-center gap-2 shadow-xl shimmer-btn"
+              >
+                <Ticket className="w-4 h-4 text-[#C9A96E]" /> Generate Pass
+              </button>
+            </div>
           </form>
         )}
 
-        {/* STEP 3: Pass Ticket Confirmation Badge */}
-        {step === 3 && (
-          <div className="text-center space-y-4 py-2 animate-scaleUp">
-            <div className="inline-flex p-3 rounded-full bg-[#EEE8F1] text-[#C9A96E] border border-[#C9A96E]/40 mb-1">
-              <CheckCircle2 className="w-8 h-8 text-[#6F557D]" />
+        {/* STEP 2: DIGITAL PASS PREVIEW */}
+        {step === 'pass' && (
+          <div className="space-y-4 text-center overflow-y-auto animate-scaleUp">
+            <div className="space-y-1">
+              <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#432C4D]">
+                Your Official Fresher Pass
+              </h3>
+              <p className="text-xs text-[#71806B] font-light">
+                Integral Festa 2026 • Department of Mathematics
+              </p>
             </div>
 
-            <h3 className="font-serif text-2xl font-bold text-[#432C4D]">
-              YOU'RE IN! 🎉
-            </h3>
-            <p className="font-script text-2xl text-[#6F557D] -mt-2">
-              Welcome to Integral Festa 2026
-            </p>
-
-            {/* Digital Pass Ticket Card */}
-            <div className="glass-card-dark p-4 rounded-2xl border border-[#C9A96E]/50 text-left space-y-3 shadow-xl relative overflow-hidden">
-              <div className="absolute top-2 right-2 text-xs font-serif text-[#C9A96E] opacity-70">
-                ∫ ∞
-              </div>
-
-              <div className="border-b border-[#C9A96E]/30 pb-2">
-                <div className="text-[10px] uppercase tracking-widest text-[#C9A96E] font-medium">
-                  {EVENT_DETAILS.department}
-                </div>
-                <div className="font-serif text-lg font-bold text-[#FAF8F4]">
-                  {name}
-                </div>
-                <div className="text-xs text-[#DCD2E3]/80">
-                  {stream} • Roll: {rollNo}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-2 text-xs text-[#FAF8F4]/90">
-                <div>
-                  <span className="text-[10px] text-[#C9A96E] block">DATE & TIME</span>
-                  14 Oct 2026 | 10:00 AM
-                </div>
-                <div>
-                  <span className="text-[10px] text-[#C9A96E] block">PASS CODE</span>
-                  <span className="font-mono text-[#C9A96E] font-bold">{ticketId}</span>
-                </div>
-              </div>
-
-              <div className="pt-1 flex items-center justify-between text-[10px] text-[#DCD2E3]/70">
-                <span>📍 IQAC Hall, Science PG Block</span>
-                <span className="capitalize">🍱 {foodPref}</span>
-              </div>
+            {/* Exact Template Digital Pass Display */}
+            <div className="py-1">
+              <DigitalPass
+                name={name}
+                rollNumber={rollNo}
+                program={program}
+                batch={batch}
+              />
             </div>
 
-            <div className="flex gap-2 pt-2">
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 pt-2">
               <button
-                onClick={resetModal}
-                className="flex-1 py-2.5 px-4 rounded-xl bg-[#EEE8F1] text-[#432C4D] text-xs font-semibold hover:bg-[#DCD2E3] transition-colors"
+                type="button"
+                onClick={() => setStep('form')}
+                className="w-full sm:w-1/2 py-3 px-4 rounded-2xl bg-[#EEE8F1] hover:bg-[#DCD2E3] text-[#432C4D] text-xs font-semibold border border-[#DCD2E3] transition-colors flex items-center justify-center gap-2"
               >
-                Close & Return
+                <RotateCcw className="w-3.5 h-3.5" /> Return to Form
               </button>
+
               <button
-                onClick={() => alert(`Pass ${ticketId} saved to your device!`)}
-                className="flex-1 py-2.5 px-4 rounded-xl bg-[#C9A96E] text-[#432C4D] text-xs font-bold hover:bg-[#EAD5A8] transition-colors flex items-center justify-center gap-1.5 shadow-md"
+                type="button"
+                onClick={handleDownloadPdf}
+                disabled={isDownloading}
+                className="w-full sm:w-1/2 py-3 px-4 rounded-2xl bg-gradient-to-r from-[#C9A96E] to-[#EAD5A8] text-[#432C4D] text-xs font-bold shadow-md hover:shadow-gold-glow disabled:opacity-50 transition-all flex items-center justify-center gap-2"
               >
-                <Download className="w-3.5 h-3.5" /> Save Pass
+                <Download className="w-4 h-4" />
+                {isDownloading ? 'Exporting PDF...' : 'Save Pass (PDF)'}
               </button>
             </div>
           </div>
         )}
+
       </div>
     </div>
   );

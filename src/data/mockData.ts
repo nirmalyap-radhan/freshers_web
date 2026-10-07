@@ -100,67 +100,59 @@ export const SCHEDULE_DATA: ScheduleItem[] = [
 export const GALLERY_DATA: GalleryItem[] = [
   {
     id: "g1",
-    title: "Elegance in Numbers",
+    title: "Departmental Elegance",
     category: "highlights",
-    imageUrl: "/gallery/photo1.jpg",
-    caption: "Students celebrating together at the inaugural gala in IQAC Hall.",
+    imageUrl: "/gallery/IMG_3969.JPG",
+    caption: "Senior Scholars & Faculty celebrations at Science PG Block.",
     date: "Integral Festa 2026"
   },
   {
     id: "g2",
-    title: "Botanical Ambience",
+    title: "Fresher Welcome Gala",
     category: "highlights",
-    imageUrl: "/gallery/photo2.jpg",
-    caption: "Floral decorations framing the entrance of Science PG Block.",
-    date: "Decorations Preview"
+    imageUrl: "/gallery/IMG_3970.JPG",
+    caption: "Warm reception and inaugural moments at IQAC Hall.",
+    date: "Decorations & Gala"
   },
   {
     id: "g3",
     title: "Cultural Fusion Stage",
     category: "past",
-    imageUrl: "/gallery/photo3.jpg",
-    caption: "Vibrant stage performances by senior mathematics scholars.",
+    imageUrl: "/gallery/IMG_3971.JPG",
+    caption: "Vibrant stage performances by mathematics scholars.",
     date: "Fest Memories"
   },
   {
     id: "g4",
     title: "Departmental Campus",
     category: "campus",
-    imageUrl: "/gallery/photo4.jpg",
+    imageUrl: "/gallery/IMG_3972.JPG",
     caption: "Science PG Block campus surrounded by lush green foliage.",
     date: "Adaspur Campus"
   },
   {
     id: "g5",
-    title: "Mathematical Artistry",
+    title: "Infinity Fusion Fest",
     category: "teaser",
-    imageUrl: "/gallery/photo5.jpg",
-    caption: "Geometrical aesthetics and infinity design installation.",
+    imageUrl: "/gallery/IMG_3974.JPG",
+    caption: "Artistic mathematical installations and floral decor.",
     date: "Art Installation"
   },
   {
     id: "g6",
     title: "Joyous Moments & Smiles",
     category: "highlights",
-    imageUrl: "/gallery/photo6.jpg",
+    imageUrl: "/gallery/IMG_3975.JPG",
     caption: "Freshers and seniors enjoying the interactive icebreaker activities.",
     date: "Fresher Welcome"
   },
   {
     id: "g7",
-    title: "Acoustic Sunset Jam",
+    title: "Festive Celebrations",
     category: "past",
-    imageUrl: "/gallery/photo7.jpg",
-    caption: "Unplugged musical performances as dusk settled over campus.",
-    date: "Musical Session"
-  },
-  {
-    id: "g8",
-    title: "Trophy & Recognition",
-    category: "highlights",
-    imageUrl: "/gallery/photo8.jpg",
-    caption: "Golden trophies and certificates prepared for event winners.",
-    date: "Awards 2026"
+    imageUrl: "/gallery/IMG_3976.JPG",
+    caption: "Unforgettable memories of Integral Festa celebration.",
+    date: "Fest Moments"
   }
 ];
 

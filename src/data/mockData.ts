@@ -32,7 +32,7 @@ export const SCHEDULE_DATA: ScheduleItem[] = [
     description: "Traditional lamp lighting by HOD & Faculty members, followed by Saraswati Vandana and welcome address by Senior Batch.",
     category: "ceremony",
     location: "Main Auditorium Stage",
-    speaker: "Prof. Dr. S. K. Das (HOD, Mathematics)",
+    speaker: "Dr. Ajit Kumar Patra (HOD, Mathematics)",
     icon: "Sparkles"
   },
   {

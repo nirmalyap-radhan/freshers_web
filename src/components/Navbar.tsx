@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { PageId } from '../types';
-import { Menu, X, Sparkles, Calendar, Compass, Image, Users, Mail, Home, Ticket, FileText } from 'lucide-react';
+import { Menu, X, Sparkles, Calendar, Compass, Image, GraduationCap, Mail, Home, Ticket, FileText } from 'lucide-react';
 
 interface NavbarProps {
   currentPage: PageId;
@@ -24,7 +24,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'about', label: 'About Festa', sub: 'Where Math Meets Celebration', icon: <Compass className="w-4 h-4" /> },
     { id: 'events', label: 'Schedule', sub: 'Timeline & Activities', icon: <Calendar className="w-4 h-4" /> },
     { id: 'gallery', label: 'Gallery', sub: 'Visual Memories & Moments', icon: <Image className="w-4 h-4" /> },
-    { id: 'team', label: 'Department Team', sub: 'Faculty & Coordinators', icon: <Users className="w-4 h-4" /> },
+    { id: 'team', label: "HOD's Message", sub: 'Dr. Ajit Kumar Patra', icon: <GraduationCap className="w-4 h-4" /> },
     { id: 'contact', label: 'Venue & Contact', sub: 'IQAC Hall & Directions', icon: <Mail className="w-4 h-4" /> },
   ];
 

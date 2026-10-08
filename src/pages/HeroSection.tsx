@@ -2,7 +2,7 @@ import React from 'react';
 import type { PageId } from '../types';
 import { EVENT_DETAILS } from '../data/mockData';
 import { CountdownTimer } from '../components/CountdownTimer';
-import { Sparkles, ArrowRight, Calendar, MapPin, Clock, Ticket } from 'lucide-react';
+import { Sparkles, ArrowRight, Calendar, MapPin, Clock, Ticket, HeartHandshake } from 'lucide-react';
 
 interface HeroSectionProps {
   onNavigate: (page: PageId) => void;
@@ -34,10 +34,39 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenRSVP
           </div>
         </div>
 
-        {/* Department Badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EEE8F1]/80 border border-[#C9A96E]/40 text-[#432C4D] text-[11px] md:text-xs tracking-[0.2em] font-medium uppercase shadow-sm animate-fadeIn">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#C9A96E] animate-pulse" />
-          {EVENT_DETAILS.department}
+        {/* Catchy Animated Entry Welcome Invitation Banner */}
+        <div className="glass-card p-5 sm:p-7 rounded-[32px] border-2 border-[#C9A96E]/50 shadow-2xl animate-gold-glow relative overflow-hidden group">
+          {/* Subtle math watermark background */}
+          <div className="absolute -right-6 -bottom-6 font-serif text-9xl text-[#432C4D]/5 pointer-events-none select-none">
+            ∫
+          </div>
+          
+          <div className="space-y-3 relative z-10">
+            {/* Sparkling Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#432C4D] via-[#6F557D] to-[#432C4D] text-[#FAF8F4] text-[10px] sm:text-xs font-semibold uppercase tracking-[0.25em] shadow-md border border-[#C9A96E]/40">
+              <Sparkles className="w-3.5 h-3.5 text-[#C9A96E]" />
+              <span>OFFICIAL FRESHER WELCOME INVITATION</span>
+              <Sparkles className="w-3.5 h-3.5 text-[#C9A96E]" />
+            </div>
+
+            {/* Catchy & Attractive Invitation Headline */}
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[#432C4D] leading-snug">
+              Where Equations Meet Celebration — <br className="hidden sm:inline" />
+              <span className="font-script text-3xl sm:text-4xl md:text-5xl animated-gradient-text font-normal">
+                You Are Cordially Invited!
+              </span>
+            </h2>
+
+            {/* Poetic & Mathematical Welcome Message */}
+            <div className="p-3.5 rounded-2xl bg-[#EEE8F1]/60 border border-[#DCD2E3] max-w-xl mx-auto shadow-inner">
+              <p className="text-xs sm:text-sm text-[#35283A]/90 font-light leading-relaxed italic flex items-center justify-center gap-2">
+                <HeartHandshake className="w-4 h-4 text-[#6F557D] shrink-0 hidden sm:inline" />
+                <span>
+                  "Join us as we integrate laughter, derive infinite memories, and limitlessly celebrate the grand arrival of our new scholars into the Department of Mathematics family!"
+                </span>
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Main Title Block */}

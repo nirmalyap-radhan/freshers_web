@@ -188,3 +188,33 @@
   animation: glitchChromatic 0.4s ease-in-out both, glitchSlice 0.4s ease-in-out both;
 }
 
+/* Animated glowing pulse for invitation banner */
+@keyframes goldGlowPulse {
+  0%, 100% {
+    box-shadow: 0 10px 30px -10px rgba(201, 169, 110, 0.3), 0 0 20px 2px rgba(201, 169, 110, 0.2);
+  }
+  50% {
+    box-shadow: 0 15px 45px -5px rgba(111, 85, 125, 0.4), 0 0 30px 4px rgba(201, 169, 110, 0.5);
+  }
+}
+
+.animate-gold-glow {
+  animation: goldGlowPulse 4s ease-in-out infinite;
+}
+
+/* Animated multi-color gradient text shift */
+@keyframes textGradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animated-gradient-text {
+  background: linear-gradient(120deg, #432C4D, #6F557D, #C9A96E, #833ab4, #432C4D);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textGradientShift 6s ease infinite;
+}
+
+

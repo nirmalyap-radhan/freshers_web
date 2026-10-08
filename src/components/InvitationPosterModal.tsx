@@ -79,39 +79,39 @@ export const InvitationPosterModal: React.FC<InvitationPosterModalProps> = ({
             </div>
           ) : (
             // Styled Fallback Poster Card if image URL fails
-            <div className="p-6 sm:p-10 text-center space-y-6 min-h-[480px] flex flex-col justify-between w-full">
-              <div className="pt-2">
-                <div className="inline-block text-[11px] sm:text-xs font-semibold tracking-[0.25em] text-[#432C4D] uppercase border-b border-[#C9A96E]/40 pb-1">
-                  . DEPT. OF MATHEMATICS .
+            <div className="p-6 sm:p-8 text-center space-y-5 min-h-[480px] flex flex-col justify-between w-full relative overflow-hidden bg-gradient-to-b from-[#FAF8F4] to-[#EEE8F1]">
+              <div className="pt-2 space-y-1">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#432C4D] text-[#FAF8F4] text-[10px] font-semibold tracking-[0.2em] uppercase shadow-sm border border-[#C9A96E]/50">
+                  <Sparkles className="w-3 h-3 text-[#C9A96E]" />
+                  <span>OFFICIAL INVITATION</span>
+                </div>
+                <div className="text-[11px] font-serif font-bold text-[#71806B] tracking-widest uppercase pt-1">
+                  DEPARTMENT OF MATHEMATICS
                 </div>
               </div>
 
-              <div className="space-y-1 relative z-10 py-2">
-                <div className="font-script text-6xl sm:text-7xl text-[#432C4D] font-normal leading-none">
-                  Integral
+              <div className="space-y-1 relative z-10 py-1">
+                <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#432C4D]">
+                  Where Equations Meet Celebration —
+                </h3>
+                <div className="font-script text-4xl sm:text-5xl animated-gradient-text font-normal leading-tight">
+                  You Are Cordially Invited!
                 </div>
-                <div className="font-script text-5xl sm:text-6xl text-[#6F557D] font-normal leading-none -mt-3">
-                  Festa
-                </div>
-                <div className="text-xs font-semibold tracking-[0.3em] uppercase text-[#71806B] pt-2">
-                  FRESHERS WELCOME
-                </div>
+                <p className="text-xs text-[#35283A]/80 font-light italic max-w-xs mx-auto pt-1">
+                  "Join us to integrate laughter, derive infinite memories & welcome the Freshers Batch of 2026!"
+                </p>
               </div>
 
-              <div className="font-serif italic text-lg text-[#432C4D] font-semibold">
-                " AN INFINITY FUSION "
-              </div>
-
-              <div className="bg-[#EEE8F1]/70 p-4 rounded-2xl border border-[#C9A96E]/40 max-w-xs mx-auto space-y-1 text-center">
-                <div className="font-serif text-lg font-bold text-[#432C4D]">14TH OCT 2026</div>
-                <div className="text-xs font-semibold text-[#6F557D]">AT — 10.00 AM</div>
-                <div className="text-xs font-bold text-[#432C4D] uppercase pt-1">IQAC HALL, SCIENCE PG BLOCK</div>
-                <div className="text-[11px] text-[#71806B] uppercase">ADASPUR, CUTTACK</div>
+              <div className="bg-[#FAF8F4] p-4 rounded-2xl border-2 border-[#C9A96E]/40 max-w-xs mx-auto space-y-1 text-center shadow-md">
+                <div className="font-script text-2xl text-[#6F557D]">Integral Festa 2026</div>
+                <div className="font-serif text-sm font-bold text-[#432C4D]">14TH OCTOBER 2026 • 10.00 AM</div>
+                <div className="text-[11px] font-bold text-[#6F557D] uppercase">IQAC HALL, SCIENCE PG BLOCK</div>
+                <div className="text-[10px] text-[#71806B] uppercase">ADASPUR, CUTTACK</div>
               </div>
 
               <button
                 onClick={onClose}
-                className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-[#432C4D] to-[#6F557D] text-[#FAF8F4] font-medium text-sm shadow-xl flex items-center justify-center gap-2"
+                className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-[#432C4D] to-[#6F557D] text-[#FAF8F4] font-medium text-sm shadow-xl hover:shadow-2xl flex items-center justify-center gap-2 shimmer-btn"
               >
                 <Sparkles className="w-4 h-4 text-[#C9A96E]" /> Enter Festa Website
               </button>

@@ -13,7 +13,23 @@ import { ContactSection } from './pages/ContactSection';
 import { RSVPModal } from './components/RSVPModal';
 import { InvitationPosterModal } from './components/InvitationPosterModal';
 import { EVENT_DETAILS } from './data/mockData';
-import { Sparkles, Heart } from 'lucide-react';
+import { Sparkles, Heart, Phone } from 'lucide-react';
+
+const InstagramIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+  </svg>
+);
 
 export function App() {
   const [currentPage, setCurrentPage] = useState<PageId>('home');
@@ -113,8 +129,21 @@ export function App() {
               </div>
             </div>
 
-            <div className="font-script text-2xl text-[#6F557D]">
-              "{EVENT_DETAILS.subtitle}"
+            <div className="flex flex-wrap items-center justify-center gap-4 text-xs">
+              <a
+                href={EVENT_DETAILS.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#EEE8F1] hover:bg-[#DCD2E3] text-[#432C4D] font-semibold border border-[#DCD2E3] transition-colors"
+              >
+                <InstagramIcon className="w-3.5 h-3.5 text-[#E83E8C]" />
+                <span>Instagram: {EVENT_DETAILS.instagramHandle}</span>
+              </a>
+
+              <div className="inline-flex items-center gap-2 text-[#432C4D] font-medium">
+                <Phone className="w-3.5 h-3.5 text-[#6F557D]" />
+                <span className="font-mono">{EVENT_DETAILS.contacts.map(c => c.number).join(' • ')}</span>
+              </div>
             </div>
 
             <div className="flex items-center gap-1.5 text-xs text-[#432C4D]">

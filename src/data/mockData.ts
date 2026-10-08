@@ -11,6 +11,13 @@ export const EVENT_DETAILS = {
   venue: "IQAC Hall, Science PG Block",
   address: "Adaspur, Cuttack, Odisha - 754011",
   targetDate: "2026-10-14T10:00:00+05:30",
+  instagramUrl: "https://www.instagram.com/unc_mathematics?stkn=ajFycWFidHMwdXNl",
+  instagramHandle: "@unc_mathematics",
+  contacts: [
+    { number: "8260068120", formatted: "+91 82600 68120", label: "Contact Helpline 1" },
+    { number: "6371904697", formatted: "+91 63719 04697", label: "Contact Helpline 2" },
+    { number: "9937668627", formatted: "+91 99376 68627", label: "Contact Helpline 3" },
+  ]
 };
 
 export const SCHEDULE_DATA: ScheduleItem[] = [

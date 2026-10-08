@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { PageId } from './types';
 import { Navbar } from './components/Navbar';
+import { CollegeGlitchHeader } from './components/CollegeGlitchHeader';
 import { FloralBackground } from './components/FloralBackground';
 import { MathDecorations } from './components/MathDecorations';
 import { HeroSection } from './pages/HeroSection';
@@ -71,6 +72,9 @@ export function App() {
       {/* Background Decorative Floral & Math Canvas */}
       <FloralBackground opacity={0.5} />
       <MathDecorations />
+
+      {/* Top Multilingual College Header Banner with Glitch Transition */}
+      <CollegeGlitchHeader />
 
       {/* Main Full-Width Header Navigation */}
       <Navbar

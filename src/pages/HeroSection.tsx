@@ -15,6 +15,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenRSVP
       {/* Central Hero Content Box */}
       <div className="my-auto py-6 max-w-2xl mx-auto space-y-6 relative z-10">
         
+        {/* College Crest & Multilingual Institution Badge */}
+        <div className="flex justify-center">
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-[#FAF8F4]/90 border-2 border-[#C9A96E]/40 text-[#432C4D] shadow-md hover:shadow-lg transition-all group backdrop-blur-sm">
+            <img
+              src="/college-header/college-logo.png"
+              alt="Udayanath Autonomous College Crest"
+              className="w-8 h-8 rounded-full object-cover shadow-sm bg-white group-hover:rotate-6 transition-transform"
+            />
+            <div className="text-left border-l border-[#C9A96E]/30 pl-3">
+              <div className="text-[10px] sm:text-xs font-serif font-bold text-[#432C4D] leading-tight">
+                UDAYANATH AUTONOMOUS COLLEGE OF SCIENCE & TECHNOLOGY
+              </div>
+              <div className="text-[9px] text-[#71806B] font-semibold tracking-wider uppercase">
+                ADASPUR, CUTTACK - 754011
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Department Badge */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EEE8F1]/80 border border-[#C9A96E]/40 text-[#432C4D] text-[11px] md:text-xs tracking-[0.2em] font-medium uppercase shadow-sm animate-fadeIn">
           <span className="w-1.5 h-1.5 rounded-full bg-[#C9A96E] animate-pulse" />

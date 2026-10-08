@@ -100,14 +100,18 @@ export const ScheduleSection: React.FC = () => {
                 <h3 className="font-serif text-lg md:text-xl font-bold text-[#432C4D]">
                   {item.title}
                 </h3>
-                <div className="text-xs font-semibold text-[#6F557D] font-serif italic">
-                  {item.subtitle}
-                </div>
+                {item.subtitle && (
+                  <div className="text-xs font-semibold text-[#6F557D] font-serif italic">
+                    {item.subtitle}
+                  </div>
+                )}
               </div>
 
-              <p className="text-xs md:text-sm text-[#35283A]/80 leading-relaxed font-light">
-                {item.description}
-              </p>
+              {item.description && (
+                <p className="text-xs md:text-sm text-[#35283A]/80 leading-relaxed font-light">
+                  {item.description}
+                </p>
+              )}
 
               <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-[#71806B] border-t border-[#DCD2E3]/50">
                 <div className="flex items-center gap-1">

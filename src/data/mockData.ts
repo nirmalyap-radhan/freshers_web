@@ -38,19 +38,20 @@ export const SCHEDULE_DATA: ScheduleItem[] = [
     subtitle: "Lamping & Auspicious Invocation",
     description: "Traditional lamp lighting by HOD & Faculty members, followed by Saraswati Vandana and welcome address by Senior Batch.",
     category: "ceremony",
-    location: "Main Auditorium Stage",
+    location: "Science PG IQAC Hall",
     speaker: "Dr. Ajit Kumar Patra (HOD, Mathematics)",
     icon: "Sparkles"
   },
   {
     id: "3",
     time: "11:00 AM",
-    title: "Interactive Math Fusion Activities",
-    subtitle: "Puzzles, Infinity Quiz & Logic Riddles",
-    description: "Fun mathematical icebreakers, Fibonacci sequence speed challenge, and interactive puzzle rounds with exciting instant rewards.",
-    category: "academic",
-    location: "Main Stage & Interactive Zone",
-    icon: "Brain"
+    title: "Keynote Speeches & Addresses",
+    subtitle: "Addresses by Chief Guest, Principal & Teachers",
+    description: "Inspirational addresses, wisdom and insights shared by the Honorable Chief Guest, College Principal, HOD, and esteemed faculty members.",
+    category: "ceremony",
+    location: "Science PG IQAC Hall",
+    speaker: "Chief Guest, Principal & Teachers",
+    icon: "Sparkles"
   },
   {
     id: "4",
@@ -65,11 +66,9 @@ export const SCHEDULE_DATA: ScheduleItem[] = [
   {
     id: "5",
     time: "01:00 PM",
-    title: "Gourmet Lunch & Networking",
-    subtitle: "Feast & Informal Interactions",
-    description: "Delightful buffet lunch served with floral dining ambience. Seniors & freshers bond over delicious food and conversations.",
+    title: "Gourmet Lunch",
     category: "food",
-    location: "PG Block Dining Pavilion",
+    location: "College Stadium",
     icon: "Utensils"
   },
   {

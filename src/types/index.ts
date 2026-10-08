@@ -4,8 +4,8 @@ export interface ScheduleItem {
   id: string;
   time: string;
   title: string;
-  subtitle: string;
-  description: string;
+  subtitle?: string;
+  description?: string;
   category: 'ceremony' | 'academic' | 'games' | 'cultural' | 'food';
   location: string;
   speaker?: string;

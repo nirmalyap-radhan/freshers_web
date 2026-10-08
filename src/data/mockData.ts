@@ -26,9 +26,9 @@ export const SCHEDULE_DATA: ScheduleItem[] = [
     time: "10:00 AM",
     title: "Welcome & Registration",
     subtitle: "Receiving Freshers & Welcome Kit",
-    description: "Registration desk opens at IQAC Hall lobby. Juniors receive personalized Infinity Fusion badges, floral corsages, and event guides.",
+    description: "Registration desk opens at Science PG IQAC Hall. Juniors receive personalized Infinity Fusion badges, floral corsages, and event guides.",
     category: "ceremony",
-    location: "IQAC Hall Entrance",
+    location: "Science PG IQAC Hall",
     icon: "UserCheck"
   },
   {
@@ -60,7 +60,7 @@ export const SCHEDULE_DATA: ScheduleItem[] = [
     subtitle: "Unleashing Junior Talent",
     description: "Spot talent showcase, rapid-fire Q&A, hilarious funny awards, and musical acoustic jamming sessions by the departmental band.",
     category: "games",
-    location: "Main Auditorium Stage",
+    location: "Science PG IQAC Hall",
     icon: "Music"
   },
   {
@@ -78,7 +78,7 @@ export const SCHEDULE_DATA: ScheduleItem[] = [
     subtitle: "Mr. & Ms. Fresher Audition Rounds",
     description: "Ramp walk, personality round, talent showcase, and witty Q&A for the coveted titles of Mr. & Ms. Integral Festa 2026.",
     category: "games",
-    location: "Main Stage",
+    location: "Science PG IQAC Hall",
     icon: "Trophy"
   },
   {
@@ -88,7 +88,7 @@ export const SCHEDULE_DATA: ScheduleItem[] = [
     subtitle: "Dance, Music & Dramatic Acts",
     description: "Electrifying dance routines, classical fusion acts, beatboxing, drama performance, and DJ sunset dance floor session.",
     category: "cultural",
-    location: "Main Auditorium Stage",
+    location: "Science PG IQAC Hall",
     icon: "Flame"
   },
   {
@@ -98,7 +98,7 @@ export const SCHEDULE_DATA: ScheduleItem[] = [
     subtitle: "Crownings, Momento Distribution & Vote of Thanks",
     description: "Crowing of Mr. & Ms. Fresher 2026, award distribution for math activities, group photograph, and vote of thanks.",
     category: "ceremony",
-    location: "Main Stage",
+    location: "Science PG IQAC Hall",
     icon: "Crown"
   }
 ];
